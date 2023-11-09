@@ -29,7 +29,7 @@ class Screen:
         for line_id in self.canvas_lines:
             self.canvas.delete(line_id)
 
-    def drawLine(self, points, color = 'black', width = 2):
+    def drawLine(self, points, color = 'black', width = 10):
         # Draw line and add id to be deleted next frame
         canvas_line_id = self.canvas.create_line(points, fill=color, width=width)
         self.canvas_lines.append(canvas_line_id)
