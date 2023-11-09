@@ -8,12 +8,11 @@ vy = 1
 while True:
     x += vx
     y += vy
-    # Draw line at x1 = 0  y1 = 0  x2 = 100  y2 = 100
     if y == screen.SCR_HEIGHT or y == 0:
         vy *= -1
     if x == screen.SCR_WIDTH or x == 0:
         vx *= -1
-    screen.drawLine([x - 10,y - 10, x, y])
-
+    screen.drawLine([x - 5,y - 5, x + 5, y + 5])
+    screen.drawLine([0, 0, Screen.SCR_WIDTH, 0, Screen.SCR_WIDTH, Screen.SCR_HEIGHT, 0, Screen.SCR_HEIGHT, 0, 0])
     # Draw stuff and delete old lines
     screen.mainloop()
