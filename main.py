@@ -1,5 +1,9 @@
-import tkinter as tk
-window = tk.Tk()
-label = tk.Label(text="Some test text")
-label.pack()
-window.mainloop()
+from screen import Screen
+
+screen = Screen()
+
+i = 1
+while True:
+    i += 1
+    screen.drawLine([0, 0, i, i])
+    screen.mainloop()
