@@ -19,7 +19,7 @@ class Screen:
         self.canvas.pack()
         
         # Array of canvas lines to delete
-        self.canvas_lines = []
+        self.canvas_elements = []
 
         # Get last frame time
         self.last_update = Screen.getTimeMs()        
@@ -36,8 +36,8 @@ class Screen:
         self.window.update()
         
         # Delete old lines
-        while len(self.canvas_lines) > 0:
-            line_id = self.canvas_lines.pop()
+        while len(self.canvas_elements) > 0:
+            line_id = self.canvas_elements.pop()
             self.canvas.delete(line_id)
 
         # Now time
@@ -54,4 +54,9 @@ class Screen:
     def drawLine(self, points, color = 'black', width = 10):
         # Draw line and add id to be deleted next frame
         canvas_line_id = self.canvas.create_line(points, fill=color, width=width)
-        self.canvas_lines.append(canvas_line_id)
+        self.canvas_elements.append(canvas_line_id)
+
+    def drawCircle(self, x, y, radius = 10, fill = None, outline = 'black', width = 10):
+        # Draw circle and add id to be deleted next frame
+        canvas_circle_id = self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=fill, outline=outline, width=width)
+        self.canvas_elements.append(canvas_circle_id)
