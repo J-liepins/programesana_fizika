@@ -1,16 +1,17 @@
 from screen import Screen
 
 screen = Screen()
-x = 0
-y = 0
+x = screen.SCR_WIDTH/2
+y = screen.SCR_HEIGHT/2
 vx = 1
 vy = 1
 while True:
     x += vx
-    y += vy
-    if y == screen.SCR_HEIGHT or y == 0:
-        vy *= -1
-    if x == screen.SCR_WIDTH or x == 0:
+    y += vy 
+    vy+=screen.FRAME_TIME*9.81
+    if (y >= screen.SCR_HEIGHT and vy>0) or (y <= 0 and vy<0):
+        vy /= -1.2
+    if (x >= screen.SCR_WIDTH and vx>0) or (x <= 0 and vx<0):
         vx *= -1
     # screen.drawLine([x - 5,y - 5, x + 5, y + 5])
     screen.drawCircle(x, y, 20, outline='black', fill=None, width = 5)
