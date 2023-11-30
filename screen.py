@@ -47,11 +47,11 @@ class Screen:
         # Time to wait for 60fps
         time_to_wait = Screen.FRAME_TIME - delta_time
         # If not negative, then wait it
-        if (time_to_wait > 0): time.sleep(time_to_wait)
+        # if (time_to_wait > 0): time.sleep(time_to_wait)
         # Update last_update time
         self.last_update = Screen.getTimeMs()
 
-    def drawLine(self, points, color = 'black', width = 10):
+    def drawLine(self, points, color = 'black', width = 3):
         # Draw line and add id to be deleted next frame
         canvas_line_id = self.canvas.create_line(points, fill=color, width=width)
         self.canvas_elements.append(canvas_line_id)
@@ -60,3 +60,5 @@ class Screen:
         # Draw circle and add id to be deleted next frame
         canvas_circle_id = self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=fill, outline=outline, width=width)
         self.canvas_elements.append(canvas_circle_id)
+
+    
