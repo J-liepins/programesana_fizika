@@ -1,4 +1,4 @@
-Daļiņu kustības simulācija
+# Daļiņu kustības simulācija
 
 Fizika modelis, kas raksturo, kāda objekta vai vairāku objektu sadursmes savā starpā un pret zemi un sienām dažādu blīvumu šķidrumos. Var izvēlēties jebkādus ātrumus, jebkādas masas, jebkādu g force.
 
