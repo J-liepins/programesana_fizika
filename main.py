@@ -3,7 +3,7 @@ from screen import Screen
 screen = Screen()
 x = screen.SCR_WIDTH/2
 y = screen.SCR_HEIGHT/2
-vx = 2
+vx = 3
 vy = 1
 while True:
     x += vx
