@@ -10,9 +10,13 @@ while True:
     y += vy 
     vy+=screen.FRAME_TIME*9.81
     if (y >= screen.SCR_HEIGHT and vy>0) or (y <= 0 and vy<0):
-        vy /= -1.2
+        vy /= -1.5
     if (x >= screen.SCR_WIDTH and vx>0) or (x <= 0 and vx<0):
         vx *= -1
+    if (abs(vy) < 0.01):
+        vx = vx * 0.99
+    if (abs(vx) < 0.01):
+        vx = 0
     # screen.drawLine([x - 5,y - 5, x + 5, y + 5])
     screen.drawCircle(x, y, 20, outline='black', fill=None, width = 5)
 
