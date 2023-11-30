@@ -7,7 +7,7 @@ def on_canvas_click(event):
 
 x = 0
 y = 0
-vx = -1
+vx = 10
 vy = 1
 
 r = 20
@@ -21,7 +21,7 @@ f = const * rho
 while True:
     x += vx
     y += vy 
-    vy+=screen.FRAME_TIME*9.81
+    vy+=screen.FRAME_TIME*1
     if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
         vy /= ey
     if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
