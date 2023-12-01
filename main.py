@@ -4,6 +4,7 @@ import math
 dragObj = False
 def clickCallback(event):
     global dragObj
+
     distance = math.sqrt((event.x - x)**2 + (event.y - y)**2)
     if distance <= 60:
         dragObj = True
@@ -11,16 +12,18 @@ def clickCallback(event):
 def releaseCallback(event):
     global dragObj
     global physics
+    global vy
+
     dragObj = False
     physics = True
-    global vy
     vy = 0
 
 def dragCallback(event):
     global dragObj
+    global physics
     global x
     global y
-    global physics
+
     if dragObj:
         physics = False
         x = event.x
@@ -44,22 +47,23 @@ rho = 10
 const = 0.001
 f = const * rho
 while True:
-    x += vx
-    y += vy 
-    vy+=screen.FRAME_TIME*1
-    if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
-        vy /= ey
-    if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
-        vx *= ex
-    if (abs(vx) > 0.01):
-        vx -= f*vx*vx
-    if (abs(vy) > 0.01):
-        vy -= f*vy*vy
-    if (abs(vy) < 0.01):
-        vx = vx * 0.99
-        vy = 0
-    if (abs(vx) < 0.01):
-        vx = 0
+    if physics:
+        x += vx
+        y += vy 
+        vy+=screen.FRAME_TIME*9.81
+        if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
+            vy /= ey
+        if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
+            vx *= ex
+        if (abs(vx) > 0.01):
+            vx -= f*vx*vx
+        if (abs(vy) > 0.01):
+            vy -= f*vy*vy
+        if (abs(vy) < 0.01):
+            vx = vx * 0.99
+            vy = 0
+        if (abs(vx) < 0.01):
+            vx = 0
     screen.drawCircle(x, y, r, outline='black', fill=None, width = 3)
 
     # Canvas outline
