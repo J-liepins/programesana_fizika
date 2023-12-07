@@ -35,7 +35,7 @@ screen = Screen(clickCallback, releaseCallback, dragCallback)
 x = screen.SCR_WIDTH/2
 y = screen.SCR_HEIGHT/2
 physics = True
-vx = 3
+vx = 100
 vy = 1
 
 r = 20
@@ -54,16 +54,17 @@ while True:
         if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
             vy /= ey
         if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
-            vx *= ex
+            vx /= ex
         if (abs(vx) > 0.01):
-            vx -= f*vx*vx
+            vx = vx/abs(vx) * (abs(vx) - f*vx)
         if (abs(vy) > 0.01):
-            vy -= f*vy*vy
+            vy = vy/abs(vy) * (abs(vy) - f*vy)
         if (abs(vy) < 0.01):
-            vx = vx * 0.99
+            vx *= 0.99
             vy = 0
         if (abs(vx) < 0.01):
             vx = 0
+        print(vx, x)
     screen.drawCircle(x, y, r, outline='black', fill=None, width = 3)
 
     # Canvas outline
