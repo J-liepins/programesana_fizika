@@ -13,7 +13,7 @@ vy = 1
 r = 20
 # elasticity
 ey = -1.5
-ex = -1
+ex = -1.5
 # f is proportional to rho and proportional to v^2
 rho = 10
 const = 0.001
@@ -25,7 +25,7 @@ while True:
     if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
         vy /= ey
     if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
-        vx *= ex
+        vx /= ex
     if (abs(vx) > 0.01):
         vx -= f*vx*vx
     if (abs(vy) > 0.01):
