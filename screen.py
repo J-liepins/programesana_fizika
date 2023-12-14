@@ -10,25 +10,30 @@ class Screen:
     # Seconds between frames for 60fps
     FRAME_TIME = 0.01666
 
-    def __init__(self):
+    def __init__(self, clickCallback, releaseCallback, dragCallback):
         # Create window
         self.window = tk.Tk()
         
         # Add canvas
         self.canvas = Canvas(self.window, width=Screen.SCR_WIDTH, height=Screen.SCR_HEIGHT)
         self.canvas.pack()
+
+        # Canvas event callbacks
+        self.canvas.bind('<Button-1>', clickCallback)
+        self.canvas.bind('<ButtonRelease-1>', releaseCallback)
+        self.canvas.bind('<B1-Motion>', dragCallback)
         
         # Array of canvas lines to delete
         self.canvas_elements = []
 
         # Get last frame time
-        self.last_update = Screen.getTimeMs()        
+        self.last_update = Screen.getTime()        
 
         # Ignore this
         super().__init__()
 
-    def getTimeMs():
-        return round(time.time() * 1000)
+    def getTime():
+        return time.time()
 
     def mainloop(self):
         # Update window
@@ -41,7 +46,7 @@ class Screen:
             self.canvas.delete(line_id)
 
         # Now time
-        time_now = Screen.getTimeMs()
+        time_now = Screen.getTime()
         # Time since last update
         delta_time = time_now - self.last_update
         # Time to wait for 60fps
@@ -49,7 +54,7 @@ class Screen:
         # If not negative, then wait it
         # if (time_to_wait > 0): time.sleep(time_to_wait)
         # Update last_update time
-        self.last_update = Screen.getTimeMs()
+        self.last_update = Screen.getTime()
 
     def drawLine(self, points, color = 'black', width = 3):
         # Draw line and add id to be deleted next frame

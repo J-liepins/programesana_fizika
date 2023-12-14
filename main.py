@@ -1,13 +1,41 @@
 from screen import Screen
+import math
 
-screen = Screen()
-def on_canvas_click(event):
-    x = event.x
-    y = event.y
+dragObj = False
+def clickCallback(event):
+    global dragObj
 
-x = 0
-y = 0
-vx = 10
+    distance = math.sqrt((event.x - x)**2 + (event.y - y)**2)
+    if distance <= 60:
+        dragObj = True
+
+def releaseCallback(event):
+    global dragObj
+    global physics
+    global vy
+
+    dragObj = False
+    physics = True
+    vy = 0
+
+def dragCallback(event):
+    global dragObj
+    global physics
+    global x
+    global y
+
+    if dragObj:
+        physics = False
+        x = event.x
+        y = event.y
+    else:
+        physics = True
+
+screen = Screen(clickCallback, releaseCallback, dragCallback)
+x = screen.SCR_WIDTH/2
+y = screen.SCR_HEIGHT/2
+physics = True
+vx = 100
 vy = 1
 
 r = 20
@@ -19,22 +47,24 @@ rho = 10
 const = 0.001
 f = const * rho
 while True:
-    x += vx
-    y += vy 
-    vy+=screen.FRAME_TIME*1
-    if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
-        vy /= ey
-    if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
-        vx /= ex
-    if (abs(vx) > 0.01):
-        vx -= f*vx*vx
-    if (abs(vy) > 0.01):
-        vy -= f*vy*vy
-    if (abs(vy) < 0.01):
-        vx = vx * 0.99
-        vy = 0
-    if (abs(vx) < 0.01):
-        vx = 0
+    if physics:
+        x += vx
+        y += vy 
+        vy+=screen.FRAME_TIME*9.81
+        if (y + r >= screen.SCR_HEIGHT and vy>0) or (y - r <= 0 and vy<0):
+            vy /= ey
+        if (x + r >= screen.SCR_WIDTH and vx>0) or (x - r <= 0 and vx<0):
+            vx /= ex
+        if (abs(vx) > 0.01):
+            vx = vx/abs(vx) * (abs(vx) - f*vx)
+        if (abs(vy) > 0.01):
+            vy = vy/abs(vy) * (abs(vy) - f*vy)
+        if (abs(vy) < 0.01):
+            vx *= 0.99
+            vy = 0
+        if (abs(vx) < 0.01):
+            vx = 0
+        print(vx, x)
     screen.drawCircle(x, y, r, outline='black', fill=None, width = 3)
 
     # Canvas outline
