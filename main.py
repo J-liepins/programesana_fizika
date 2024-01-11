@@ -1,4 +1,5 @@
 import math
+import random
 from screen import Screen
 from physics import PhysicsObject
 
@@ -52,13 +53,13 @@ def dragCallback(event):
 
 screen = Screen(clickCallback, releaseCallback, dragCallback)
 objs = [
-    PhysicsObject(sx=100, sy=100),
-    PhysicsObject(sx=300, sy=300)
+    PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
+    PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
 ]
 
 while True:
     for obj in objs:
-        obj.physics_update()
+        obj.physics_update(objs)
         screen.drawCircle(obj.x, obj.y, PhysicsObject.r, outline='black', fill=None, width = 3)
 
     # Canvas outline

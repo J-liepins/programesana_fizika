@@ -1,3 +1,5 @@
+import math
+import numpy as np
 from screen import Screen
 
 class PhysicsObject:
@@ -17,7 +19,7 @@ class PhysicsObject:
         self.vy = svy
         self.physics = True
     
-    def physics_update(self):
+    def physics_update(self, objs):
         if self.physics:
             # Apply vx and vy
             self.x += self.vx
@@ -50,3 +52,18 @@ class PhysicsObject:
                 self.vy = 0
             if (abs(self.vx) < 0.01):
                 self.vx = 0
+            
+            # Collision with other physics objects
+            for other_obj in objs:
+                dx = self.x - other_obj.x
+                dy =self.y- other_obj.y
+                dist = (self.r+ other_obj.r)**2
+                if (dx**2+dy**2<dist):
+                    ox = dist - dx**2
+                    oy = dist - dy**2 
+                    self.vx += np.sign(dx) * ox * 0.001
+                    self.vy += np.sign(dy) * oy * 0.001
+                    other_obj.vx -= np.sign(dx) * ox * 0.001
+                    other_obj.vy -= np.sign(dy) * oy * 0.001
+                    # self.vx, other_obj.vx = other_obj.vx * 0.8, self.vx * 0.8
+                    # self.vy, other_obj.vy = other_obj.vy * 0.8, self.vy * 0.8
