@@ -57,6 +57,7 @@ objs = [
     PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
 ]
 
+
 while True:
     for obj in objs:
         obj.physics_update(objs)
