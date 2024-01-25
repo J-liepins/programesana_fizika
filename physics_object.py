@@ -4,7 +4,7 @@ class PhysicsObject:
     r = 20
     ey = -1.5
     ex = -1
-    g = 9.81
+    g = 5
     # # f is proportional to rho and proportional to v^2
     rho = 10
     const = 0.06
@@ -46,7 +46,7 @@ class PhysicsObject:
             
             # Ground friction
             if (abs(self.vy) < 0.01):
-                self.vx *= 0.99
+                self.vx *= 0.9
                 self.vy = 0
             if (abs(self.vx) < 0.01):
                 self.vx = 0
