@@ -2,6 +2,8 @@ import math
 import random
 from screen import Screen
 from physics_object import PhysicsObject
+from pynput import mouse
+
 
 import time
 
@@ -47,7 +49,15 @@ def dragCallback(event):
         prev_mouse_pos = (event.x, event.y)
         prev_time = current_time
 
-screen = Screen(clickCallback, releaseCallback, dragCallback)
+def rightClickCallback(event):
+    global objs
+    objs.append(PhysicsObject(event.x, event.y))
+
+  
+
+
+
+screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback)
 objs = [
     PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
     PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
