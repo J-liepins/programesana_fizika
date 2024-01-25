@@ -2,7 +2,6 @@ import math
 import random
 from screen import Screen
 from physics_object import PhysicsObject
-from pynput import mouse
 
 
 import time
