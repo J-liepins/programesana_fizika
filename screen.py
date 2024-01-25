@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import Canvas, Entry, Button, messagebox
 import time
 
-
+global x_value
+global y_value
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
     SCR_WIDTH = 1080
@@ -54,6 +55,8 @@ class Screen:
 
     def submit_data(self):
         # Get the values from the entry boxes
+        x_value=0
+        y_value=0
         x_value = self.entry_x.get()
         y_value = self.entry_y.get()
         messagebox.showinfo('Submitted', "Your data is submitted successfully!" + x_value + y_value) 

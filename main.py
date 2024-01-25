@@ -4,12 +4,14 @@ from screen import Screen
 from physics_object import PhysicsObject
 
 
+
 import time
 
 dragObj = None
 prev_mouse_pos = (0, 0)
 prev_time = time.time()
-
+global x_value
+global y_value
 def clickCallback(event):
     global dragObj
 
@@ -58,6 +60,7 @@ def rightClickCallback(event):
 
 screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback)
 objs = [
+    
     PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
     PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
 ]
