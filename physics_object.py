@@ -1,7 +1,5 @@
-import math
 import numpy as np
 from screen import Screen
-
 class PhysicsObject:
     r = 20
     ey = -1.5
@@ -67,3 +65,4 @@ class PhysicsObject:
                     other_obj.vy -= np.sign(dy) * oy * 0.001
                     # self.vx, other_obj.vx = other_obj.vx * 0.8, self.vx * 0.8
                     # self.vy, other_obj.vy = other_obj.vy * 0.8, self.vy * 0.8
+            # drag drop physics
