@@ -17,7 +17,7 @@ class Screen:
         
         # Add canvas
         self.canvas = Canvas(self.window, width=Screen.SCR_WIDTH, height=Screen.SCR_HEIGHT)
-        self.canvas.pack()
+        self.canvas.grid(row=3, column=2)
 
         # Canvas event callbacks
         self.canvas.bind('<Button-1>', clickCallback)
@@ -32,14 +32,22 @@ class Screen:
         self.last_update = Screen.getTime()  
 
         # Add entry boxes
-        self.entry_x = Entry(self.window)
-        self.entry_y = Entry(self.window)
-        self.entry_x.pack(side=tk.LEFT)
-        self.entry_y.pack(side=tk.LEFT)
+        self.label1 = tk.Label(self.window, text="vx")
+        self.label1.grid(row=0, column=0)
 
-        # Add submit button
+        self.entry_x = Entry(self.window)
+        self.entry_x.grid(row=0, column=1)
+
+        self.label2 = tk.Label(self.window, text="vy")
+        self.label2.grid(row=1, column=0)
+
+        self.entry_y = Entry(self.window)
+        self.entry_y.grid(row=1, column=1)
+
+        # add submit buttons
+
         self.submit_button = Button(self.window, text="Submit", command=self.submit_data)
-        self.submit_button.pack(side=tk.LEFT)     
+        self.submit_button.grid(row=2, columnspan=2)
 
         # Ignore this
         super().__init__()
