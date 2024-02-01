@@ -1,17 +1,13 @@
 import math
 import random
+from tkinter import messagebox
 from screen import Screen
 from physics_object import PhysicsObject
-
-
-
 import time
 
 dragObj = None
 prev_mouse_pos = (0, 0)
 prev_time = time.time()
-global x_value
-global y_value
 def clickCallback(event):
     global dragObj
 
@@ -24,7 +20,6 @@ def clickCallback(event):
 def releaseCallback(event):
     global dragObj
     global objs
-    global self
     dragObj.physics = True
     dragObj = None
     
@@ -52,19 +47,28 @@ def dragCallback(event):
 
 def rightClickCallback(event):
     global objs
-    objs.append(PhysicsObject(event.x, event.y))
+    global screen
+    # Get the values from the entry boxes
+    vx_str = screen.entry_x.get()
+    vy_str = screen.entry_y.get()
+
+    # Check if either vx_str or vy_str is empty
+    if vx_str == '' or vy_str == '':
+        # Display an error message and return
+        messagebox.showerror('Error', "Please enter values for vx and vy.")
+        return
+    vx_value = float(vx_str)
+    vy_value = float(vy_str)
+    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value))  # Create object with vx and vy values
+
 def resetCallback(event):
     global objs
     objs.clear()
      
-
-
-
 screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback)
 objs = [
-    
-    PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
-    PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
+PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
+PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
 ]
 
 

@@ -10,12 +10,12 @@ class PhysicsObject:
     const = 0.06
     f = const * rho
 
-    
+   
     def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0):
         self.x = sx
         self.y=sy
-        self.vx=0
-        self.vy = 0
+        self.vx= svx
+        self.vy = svy
         self.physics = True
     
     def physics_update(self, objs):
