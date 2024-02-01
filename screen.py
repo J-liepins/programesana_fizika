@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import Canvas, Entry, Button, messagebox
 import time
-s
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
     SCR_WIDTH = 1080
