@@ -3,14 +3,11 @@ import random
 from tkinter import messagebox
 from screen import Screen
 from physics_object import PhysicsObject
-
-
 import time
 
 dragObj = None
 prev_mouse_pos = (0, 0)
 prev_time = time.time()
-
 def clickCallback(event):
     global dragObj
 
