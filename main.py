@@ -53,12 +53,14 @@ def dragCallback(event):
 def rightClickCallback(event):
     global objs
     objs.append(PhysicsObject(event.x, event.y))
+def resetCallback(event):
+    global objs
+    objs.clear()
+     
 
-  
 
 
-
-screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback)
+screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback)
 objs = [
     
     PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
