@@ -3,6 +3,7 @@ from tkinter import Canvas, Entry, Button, messagebox
 import time
 
 
+
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
     SCR_WIDTH = 1080
@@ -44,10 +45,6 @@ class Screen:
         self.entry_y = Entry(self.window)
         self.entry_y.grid(row=2, column=1)
 
-        # add submit buttons
-
-        self.submit_button = Button(self.window, text="Submit", command=self.submit_data)
-        self.submit_button.grid(row=3, columnspan=2)
 
         # Ignore this
         super().__init__()
