@@ -12,7 +12,7 @@ class Screen:
     # Seconds between frames for 60fps
     FRAME_TIME = 0.01666
 
-    def __init__(self, clickCallback, releaseCallback, dragCallback, rightClickCallback):
+    def __init__(self, clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback):
         # Create window
         self.window = tk.Tk()
         
@@ -25,6 +25,7 @@ class Screen:
         self.canvas.bind('<Button-3>', rightClickCallback)
         self.canvas.bind('<ButtonRelease-1>', releaseCallback)
         self.canvas.bind('<B1-Motion>', dragCallback)
+        self.window.bind('r', resetCallback)
         
         # Array of canvas lines to delete
         self.canvas_elements = []

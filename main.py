@@ -60,10 +60,12 @@ def rightClickCallback(event):
     vx_value = float(vx_str)
     vy_value = float(vy_str)
     objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value))  # Create object with vx and vy values
-    
-screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback)
 
-
+def resetCallback(event):
+    global objs
+    objs.clear()
+     
+screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback)
 objs = [
 PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
 PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
