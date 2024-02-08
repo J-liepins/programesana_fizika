@@ -1,7 +1,6 @@
 import math
 import random
 from tkinter import messagebox
-from typing import Self
 from screen import Screen
 from physics_object import PhysicsObject
 import time
@@ -48,20 +47,25 @@ def dragCallback(event):
 def rightClickCallback(event):
     global objs
     global screen
+    global g_value
     # Get the values from the entry boxes
     vx_str = screen.entry_x.get()
     vy_str = screen.entry_y.get()
     r_str = screen.entry_r.get()
+    m_str = screen.entry_m.get()
+    g_str = screen.slider_g.get()
 
     # Check if either vx_str or vy_str is empty
-    if vx_str == '' or vy_str == '' or r_str == '':
+    if vx_str == '' or vy_str == '' or r_str == '' or m_str == '':
         # Display an error message and return
         messagebox.showerror('Error', "Ievadiet visas vērtības")
         return
     vx_value = float(vx_str)
     vy_value = float(vy_str)
     r_value = float(r_str)
-    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value))  # Create object with vx and vy values
+    m_value = float(m_str)
+    g_value = float(g_str)
+    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy values
 
 def resetCallback(event):
     global objs
