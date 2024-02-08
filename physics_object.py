@@ -9,14 +9,16 @@ class PhysicsObject:
     rho = 10
     const = 0.06
     f = const * rho
+    
 
    
-    def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0):
+    def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0,m=1  ):
         self.x = sx
         self.y=sy
         self.vx= svx
         self.vy = svy
         self.physics = True
+        self.m=m 
     
     def physics_update(self, objs):
         if self.physics:
@@ -54,16 +56,16 @@ class PhysicsObject:
             
             # Collision with other physics objects
             for other_obj in objs:
+                other_obj.m=1
+                self.m=3
                 dx = self.x - other_obj.x
                 dy =self.y- other_obj.y
                 dist = (self.r+ other_obj.r)**2
                 if (dx**2+dy**2<dist):
-                    ox = dist - dx**2
-                    oy = dist - dy**2 
-                    self.vx += np.sign(dx) * ox * 0.001
-                    self.vy += np.sign(dy) * oy * 0.001
-                    other_obj.vx -= np.sign(dx) * ox * 0.001
-                    other_obj.vy -= np.sign(dy) * oy * 0.001
+                    self.vx = other_obj.vx(2*other_obj.m/(self.m+ other_obj.m))+self.vx(self.m-other_obj.m)/(self.m+other_obj.m)
+                    self.vy = other_obj.vy(2*other_obj.m/(self.m+ other_obj.m))+self.vy(self.m-other_obj.m)/(self.m+other_obj.m)
+                    other_obj.vx = other_obj.vx((self.m-other_obj.m)/(self.m-other_obj.m))+ self.vx((2*self.m/(self.m+ other_obj.m)))
+                    other_obj.vy = other_obj.vx((self.m-other_obj.m)/(self.m-other_obj.m))+ self.vx((2*self.m/(self.m+ other_obj.m)))
                     # self.vx, other_obj.vx = other_obj.vx * 0.8, self.vx * 0.8
                     # self.vy, other_obj.vy = other_obj.vy * 0.8, self.vy * 0.8
             # drag drop physics

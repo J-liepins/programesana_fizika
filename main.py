@@ -81,3 +81,4 @@ while True:
     screen.drawLine([0, 0, Screen.SCR_WIDTH, 0, Screen.SCR_WIDTH, Screen.SCR_HEIGHT, 0, Screen.SCR_HEIGHT, 0, 0])
     # Draw stuff and delete old lines
     screen.mainloop()
+    

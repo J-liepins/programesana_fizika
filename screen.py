@@ -4,7 +4,7 @@ import time
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
     SCR_WIDTH = 1080
-    SCR_HEIGHT = 720
+    SCR_HEIGHT = 360
     
     # Seconds between frames for 60fps
     FRAME_TIME = 0.01666
