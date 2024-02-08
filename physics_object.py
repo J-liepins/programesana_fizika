@@ -1,7 +1,6 @@
 import numpy as np
 from screen import Screen
 class PhysicsObject:
-    r = 20
     ey = -1.5
     ex = -1
     g = 5
@@ -12,13 +11,15 @@ class PhysicsObject:
     
 
    
-    def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0,m=1  ):
+    
+    def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0, sr = 20, sm = 1):
         self.x = sx
         self.y=sy
         self.vx= svx
         self.vy = svy
+        self.r = sr
         self.physics = True
-        self.m=m 
+        self.m=sm 
     
     def physics_update(self, objs):
         if self.physics:
@@ -30,9 +31,9 @@ class PhysicsObject:
             self.vy+=Screen.FRAME_TIME * PhysicsObject.g
 
             # Collision resolution
-            if (self.y + PhysicsObject.r >= Screen.SCR_HEIGHT and self.vy>0) or (self.y - PhysicsObject.r <= 0 and self.vy<0):
+            if (self.y + self.r >= Screen.SCR_HEIGHT and self.vy>0) or (self.y - self.r <= 0 and self.vy<0):
                 self.vy /= PhysicsObject.ey
-            if (self.x + PhysicsObject.r >= Screen.SCR_WIDTH and self.vx>0) or (self.x - PhysicsObject.r <= 0 and self.vx<0):
+            if (self.x + self.r >= Screen.SCR_WIDTH and self.vx>0) or (self.x - self.r <= 0 and self.vx<0):
                 self.vx /= PhysicsObject.ex
             
             # Drag

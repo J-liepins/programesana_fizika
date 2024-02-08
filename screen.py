@@ -43,6 +43,12 @@ class Screen:
         self.entry_y = Entry(self.window)
         self.entry_y.grid(row=2, column=1)
 
+        self.label3 = tk.Label(self.window, text="r")
+        self.label3.grid(row=3, column=0)
+
+        self.entry_r = Entry(self.window)
+        self.entry_r.grid(row=3, column=1)
+
 
         # Ignore this
         super().__init__()
