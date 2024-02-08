@@ -1,6 +1,7 @@
 import math
 import random
 from tkinter import messagebox
+from typing import Self
 from screen import Screen
 from physics_object import PhysicsObject
 import time
@@ -11,10 +12,9 @@ prev_time = time.time()
 def clickCallback(event):
     global dragObj
 
-
     for obj in objs:
         distance = math.sqrt((event.x - obj.x)**2 + (event.y - obj.y)**2)
-        if distance <= PhysicsObject.r + 3/2:
+        if distance <= obj.r + 3/2:
             dragObj = obj
 
 def releaseCallback(event):
@@ -51,15 +51,17 @@ def rightClickCallback(event):
     # Get the values from the entry boxes
     vx_str = screen.entry_x.get()
     vy_str = screen.entry_y.get()
+    r_str = screen.entry_r.get()
 
     # Check if either vx_str or vy_str is empty
-    if vx_str == '' or vy_str == '':
+    if vx_str == '' or vy_str == '' or r_str == '':
         # Display an error message and return
-        messagebox.showerror('Error', "Please enter values for vx and vy.")
+        messagebox.showerror('Error', "Ievadiet visas vērtības")
         return
     vx_value = float(vx_str)
     vy_value = float(vy_str)
-    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value))  # Create object with vx and vy values
+    r_value = float(r_str)
+    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value))  # Create object with vx and vy values
 
 def resetCallback(event):
     global objs
@@ -75,7 +77,7 @@ PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
 while True:
     for obj in objs:
         obj.physics_update(objs)
-        screen.drawCircle(obj.x, obj.y, PhysicsObject.r, outline='black', fill=None, width = 3)
+        screen.drawCircle(obj.x, obj.y, obj.r, outline='black', fill=None, width = 3)
 
     # Canvas outline
     screen.drawLine([0, 0, Screen.SCR_WIDTH, 0, Screen.SCR_WIDTH, Screen.SCR_HEIGHT, 0, Screen.SCR_HEIGHT, 0, 0])
