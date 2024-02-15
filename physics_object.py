@@ -58,7 +58,7 @@ class PhysicsObject:
             # Collision with other physics objects
             for other_obj in objs:
                 other_obj.m=1
-                self.m=3
+                self.m=1
                 dx = self.x - other_obj.x
                 dy =self.y- other_obj.y
                 dist = (self.r+ other_obj.r)**2
