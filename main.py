@@ -66,8 +66,7 @@ def rightClickCallback(event):
     r_value = float(r_str)
     m_value = float(m_str)
     g_value = float(g_str)
-    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy values
-
+    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy valu
 def resetCallback(event):
     global objs
     objs.clear()
