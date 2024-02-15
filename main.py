@@ -20,8 +20,9 @@ def clickCallback(event):
 def releaseCallback(event):
     global dragObj
     global objs
-    dragObj.physics = True
-    dragObj = None
+    if dragObj is not None:
+        dragObj.physics = True
+        dragObj = None
     
 
 def dragCallback(event):
@@ -69,8 +70,8 @@ def resetCallback(event):
      
 screen = Screen(clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback)
 objs = [
-PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720)),
-PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,720))
+PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,360)),
+PhysicsObject(sx=random.randint(0,1080), sy=random.randint(0,360))
 ]
 
 
