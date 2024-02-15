@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import Canvas, Entry, Button, messagebox
+from tkinter import Canvas, Entry, messagebox
+from tkinter import *
 import time
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
@@ -35,31 +36,39 @@ class Screen:
         self.label1.grid(row=1, column=0)
 
         self.entry_x = Entry(self.window)
+        self.entry_x.insert(0, "0")
         self.entry_x.grid(row=1, column=1)
 
         self.label2 = tk.Label(self.window, text="vy")
         self.label2.grid(row=2, column=0)
 
         self.entry_y = Entry(self.window)
+        self.entry_y.insert(0, "0")
         self.entry_y.grid(row=2, column=1)
 
         self.label3 = tk.Label(self.window, text="r")
         self.label3.grid(row=3, column=0)
 
         self.entry_r = Entry(self.window)
+        self.entry_r.insert(0, "10")
         self.entry_r.grid(row=3, column=1)
+
+        self.label4 = tk.Label(self.window, text="m")
+        self.label4.grid(row=4, column=0)
+
+        self.entry_m = Entry(self.window)
+        self.entry_m.insert(0, "5")
+        self.entry_m.grid(row=4, column=1)
+
+        self.label5 = tk.Label(self.window, text="g")
+        self.label5.grid(row=5, column=0)
+
+        self.slider_g = tk.Scale(self.window, from_=0, to=20, orient=HORIZONTAL)
+        self.slider_g.grid(row=5, column=1)
 
 
         # Ignore this
         super().__init__()
-
-    def submit_data(self):
-        # Get the values from the entry boxes
-        x_value = self.entry_x.get()
-        y_value = self.entry_y.get()
-        messagebox.showinfo('Submitted', "Your data is submitted successfully!" + x_value + y_value) 
-        self.entry_x.delete(0, 'end') 
-        self.entry_y.delete(0, 'end')
 
     def getTime():
         return time.time()
@@ -95,3 +104,5 @@ class Screen:
         # Draw circle and add id to be deleted next frame
         canvas_circle_id = self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=fill, outline=outline, width=width)
         self.canvas_elements.append(canvas_circle_id)
+
+        

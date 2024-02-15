@@ -19,7 +19,7 @@ class PhysicsObject:
         self.vy = svy
         self.r = sr
         self.physics = True
-        self.m=sm 
+        self.m = sm 
     
     def physics_update(self, objs):
         if self.physics:
