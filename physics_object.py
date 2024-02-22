@@ -67,8 +67,8 @@ class PhysicsObject:
                     vyorg=self.vy
                     othervxorg=other_obj.vx
                     othervyorg=other_obj.vy
-                    self.vx = othervxorg*(2*other_obj.m/(self.m+ other_obj.m))+vxorg*(self.m-other_obj.m)/(self.m+other_obj.m)
-                    self.vy = othervyorg*(2*other_obj.m/(self.m+ other_obj.m))+vyorg*(self.m-other_obj.m)/(self.m+other_obj.m)
+                    self.vx = othervxorg*(2*other_obj.m/(self.m+ other_obj.m))+vxorg*(self.m-other_obj.m)/(self.m+other_obj.m)+0.1
+                    self.vy = othervyorg*(2*other_obj.m/(self.m+ other_obj.m))+vyorg*(self.m-other_obj.m)/(self.m+other_obj.m)+0.1
                     other_obj.vx = (othervxorg*((self.m-other_obj.m)/(self.m+other_obj.m))+ vxorg*((2*self.m/(self.m+ other_obj.m))))
                     other_obj.vy = ((self.m-other_obj.m)/(self.m+other_obj.m))+ vyorg*((2*self.m/(self.m+other_obj.m)))
                     # self.vx, other_obj.vx = other_obj.vx * 0.8, self.vx * 0.8
