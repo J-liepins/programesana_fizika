@@ -43,30 +43,37 @@ def dragCallback(event):
             dragObj.vy = 0.005*((event.y - prev_mouse_pos[1])/ elapsed_time)
         prev_mouse_pos = (event.x, event.y)
         prev_time = current_time
+    g_str = screen.slider_g.get()
+    g_value = float(g_str)
+    PhysicsObject.g = g_value
 
 def rightClickCallback(event):
     global objs
     global screen
-    global g_value
+    
+    
+    
+
     # Get the values from the entry boxes
     vx_str = screen.entry_x.get()
     vy_str = screen.entry_y.get()
     r_str = screen.entry_r.get()
     m_str = screen.entry_m.get()
-    g_str = screen.slider_g.get()
+    
+
 
     # Check if either vx_str or vy_str is empty
     if vx_str == '' or vy_str == '' or r_str == '' or m_str == '':
         # Display an error message and return
         messagebox.showerror('Error', "Ievadiet visas vērtības")
         return
+   
     vx_value = float(vx_str)
     vy_value = float(vy_str)
     r_value = float(r_str)
     m_value = float(m_str)
-    g_value = float(g_str)
-    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy values
-
+    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy valu
+    
 def resetCallback(event):
     global objs
     objs.clear()
