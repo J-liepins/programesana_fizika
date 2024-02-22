@@ -19,9 +19,8 @@ def clickCallback(event):
 def releaseCallback(event):
     global dragObj
     global objs
-    if dragObj is not None:
-        dragObj.physics = True
-        dragObj = None
+    dragObj.physics = True
+    dragObj = None
     
 
 def dragCallback(event):
@@ -66,7 +65,8 @@ def rightClickCallback(event):
     r_value = float(r_str)
     m_value = float(m_str)
     g_value = float(g_str)
-    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy valu
+    objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy values
+
 def resetCallback(event):
     global objs
     objs.clear()

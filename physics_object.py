@@ -1,13 +1,14 @@
+import math
 import numpy as np
 from screen import Screen
 class PhysicsObject:
     ey = -1.5
     ex = -1
-    g = 10
+    g = 0
     # # f is proportional to rho and proportional to v^2
     rho = 10
     const = 0.06
-    f = const * rho
+    f = 0
     
 
    
@@ -57,20 +58,25 @@ class PhysicsObject:
             
             # Collision with other physics objects
             for other_obj in objs:
-                other_obj.m=1
-                self.m=3
                 dx = self.x - other_obj.x
-                dy =self.y- other_obj.y
+                dy = self.y- other_obj.y
                 dist = (self.r+ other_obj.r)**2
-                if (dx**2+dy**2<dist):
-                    vxorg=self.vx
-                    vyorg=self.vy
-                    othervxorg=other_obj.vx
-                    othervyorg=other_obj.vy
-                    self.vx = othervxorg*(2*other_obj.m/(self.m+ other_obj.m))+vxorg*(self.m-other_obj.m)/(self.m+other_obj.m)
-                    self.vy = othervyorg*(2*other_obj.m/(self.m+ other_obj.m))+vyorg*(self.m-other_obj.m)/(self.m+other_obj.m)
-                    other_obj.vx = (othervxorg*((self.m-other_obj.m)/(self.m+other_obj.m))+ vxorg*((2*self.m/(self.m+ other_obj.m))))
-                    other_obj.vy = ((self.m-other_obj.m)/(self.m+other_obj.m))+ vyorg*((2*self.m/(self.m+other_obj.m)))
-                    # self.vx, other_obj.vx = other_obj.vx * 0.8, self.vx * 0.8
-                    # self.vy, other_obj.vy = other_obj.vy * 0.8, self.vy * 0.8
+                if (dx**2+dy**2<=dist):
+                    if(dx!=0):
+                        theta = math.atan(dy/dx)
+                        vxorg=self.vx
+                        vyorg=self.vy
+                        othervxorg=other_obj.vx
+                        othervyorg=other_obj.vy
+                        vx1= vxorg*math.cos(theta)+vyorg*math.sin(theta)
+                        vy1= vxorg*math.sin(theta)+vyorg*math.cos(theta)
+                        othervx1= othervxorg*math.cos(theta)+othervyorg*math.sin(theta)
+                        othervy1= othervxorg*math.sin(theta)+othervyorg*math.cos(theta)
+                        vx2 = othervx1*(2*other_obj.m/(self.m+ other_obj.m))+vx1*(self.m-other_obj.m)/(self.m+other_obj.m)
+                        othervx2 = othervx1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vx1*((2*self.m/(self.m+ other_obj.m)))
+                        self.vx=vx2*math.cos(theta)
+                        self.vy=vy1*math.sin(theta)
+                        other_obj.vx=othervx2*math.cos(theta)
+                        other_obj.vy=othervy1*math.sin(theta)
+                    #other_obj.vy = othervyorg*((other_obj.m-self.m)/(self.m+other_obj.m))+ vyorg*((2*self.m/(self.m+ other_obj.m)))
             # drag drop physics
