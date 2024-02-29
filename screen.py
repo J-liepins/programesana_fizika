@@ -50,7 +50,7 @@ class Screen:
         self.label3.grid(row=3, column=0)
 
         self.entry_r = Entry(self.window)
-        self.entry_r.insert(0, "10")
+        self.entry_r.insert(0, "20")
         self.entry_r.grid(row=3, column=1)
 
         self.label4 = tk.Label(self.window, text="m")
@@ -63,8 +63,37 @@ class Screen:
         self.label5 = tk.Label(self.window, text="g")
         self.label5.grid(row=5, column=0)
 
-        self.slider_g = tk.Scale(self.window, from_=0, to=20, orient=HORIZONTAL)
+        self.slider_g = tk.Scale(self.window, from_=0, to=20, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_g.set(1)
         self.slider_g.grid(row=5, column=1)
+
+        self.label6 = tk.Label(self.window, text="elasticity x")
+        self.label6.grid(row=1, column=2)
+
+        self.slider_ex = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_ex.set(1)
+        self.slider_ex.grid(row=1, column=3)
+
+        self.label7 = tk.Label(self.window, text="elasticity y")
+        self.label7.grid(row=2, column=2)
+
+        self.slider_ey = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_ey.set(1)
+        self.slider_ey.grid(row=2, column=3)
+
+        self.label8 = tk.Label(self.window, text="gaisa pretestība")
+        self.label8.grid(row=3, column=2)
+
+        self.slider_f = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_f.set(0)
+        self.slider_f.grid(row=3, column=3)
+
+        self.label9 = tk.Label(self.window, text="berze")
+        self.label9.grid(row=4, column=2)
+
+        self.slider_gf = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_gf.set(1)
+        self.slider_gf.grid(row=4, column=3)
 
 
         # Ignore this
