@@ -59,31 +59,57 @@ class PhysicsObject:
                 dy = self.y- other_obj.y
                 dist = (self.r+ other_obj.r)**2
                 if (dx**2+dy**2<=dist):
-                    if(dx!=0):
-                        theta = math.atan(dy/dx)
-                        vxorg=self.vx
-                        vyorg=self.vy
-                        othervxorg=other_obj.vx
-                        othervyorg=other_obj.vy
+                    vxorg = self.vx
+                    vyorg = self.vy
+                    othervxorg = other_obj.vx
+                    othervyorg = other_obj.vy
+                    if(dx == 0):
+                        phi = math.pi/2
+                    else:
+                        phi = math.atan(dy/dx)
+                    if(vxorg == 0):
+                        theta1 = math.pi/2
+                    else:
+                        theta1 = math.atan(vyorg/vxorg)
+                    if(othervxorg == 0):
+                        theta2 = math.pi/2
+                    else:
+                        theta2 = math.atan(othervyorg/othervxorg)
+                    vx2 = (math.sqrt(vxorg**2+vyorg**2)*math.cos(theta1-phi)*(self.m-other_obj.m)+2*other_obj.m*math.sqrt(othervxorg**2+othervyorg**2)*math.cos(theta2-phi))/(self.m+other_obj.m)*math.cos(phi)+math.sqrt(vxorg**2+vyorg**2)*math.sin(theta1-phi)*math.sin(phi)
+                    vy2 = (math.sqrt(vxorg**2+vyorg**2)*math.cos(theta1-phi)*(self.m-other_obj.m)+2*other_obj.m*math.sqrt(othervxorg**2+othervyorg**2)*math.cos(theta2-phi))/(self.m+other_obj.m)*math.sin(phi)+math.sqrt(vxorg**2+vyorg**2)*math.sin(theta1-phi)*math.cos(phi)
+                    othervx2 = (math.sqrt(othervxorg**2+othervyorg**2)*math.cos(theta2-phi)*(other_obj.m-self.m)+2*self.m*math.sqrt(vxorg**2+vyorg**2)*math.cos(theta1-phi))/(self.m+other_obj.m)*math.cos(phi)+math.sqrt(othervxorg**2+othervyorg**2)*math.sin(theta2-phi)*math.sin(phi)
+                    othervy2 = (math.sqrt(othervxorg**2+othervyorg**2)*math.cos(theta2-phi)*(other_obj.m-self.m)+2*self.m*math.sqrt(vxorg**2+vyorg**2)*math.cos(theta1-phi))/(self.m+other_obj.m)*math.sin(phi)+math.sqrt(othervxorg**2+othervyorg**2)*math.sin(theta2-phi)*math.cos(phi)
+                    self.vx = vx2
+                    self.vy = vy2
+                    other_obj.vy = othervy2
+                    other_obj.vx = othervx2
+
+
+                #    if(dx!=0):
+                #         theta = math.atan(dy/dx)
+                #         vxorg=self.vx
+                #         vyorg=self.vy
+                #         othervxorg=other_obj.vx
+                #         othervyorg=other_obj.vy
                         
-                        vx1= vxorg*math.cos(theta)+vyorg*math.sin(theta)
-                        vy1= vxorg*math.sin(theta)+vyorg*math.cos(theta)
-                        othervx1= othervxorg*math.cos(theta)+othervyorg*math.sin(theta)
-                        othervy1= othervxorg*math.sin(theta)+othervyorg*math.cos(theta)
+                #         vx1= vxorg*math.cos(theta)+vyorg*math.sin(theta)
+                #         vy1= vxorg*math.sin(theta)+vyorg*math.cos(theta)
+                #         othervx1= othervxorg*math.cos(theta)+othervyorg*math.sin(theta)
+                #         othervy1= othervxorg*math.sin(theta)+othervyorg*math.cos(theta)
                         
-                        vx2 = othervx1*(2*other_obj.m/(self.m+ other_obj.m))+vx1*(self.m-other_obj.m)/(self.m+other_obj.m)
-                        othervx2 = othervx1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vx1*((2*self.m/(self.m+ other_obj.m)))
-                        # self.vx=vx2*math.cos(theta)
-                        # other_obj.vx=othervx2*math.cos(theta)
-                        self.vx=vx2
-                        other_obj.vx=othervx2
+                #         vx2 = othervx1*(2*other_obj.m/(self.m+ other_obj.m))+vx1*(self.m-other_obj.m)/(self.m+other_obj.m)
+                #         othervx2 = othervx1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vx1*((2*self.m/(self.m+ other_obj.m)))
+                #         self.vx=vx2*math.cos(theta)
+                #         other_obj.vx=othervx2*math.cos(theta)
+                #         self.vx=vx2
+                #         other_obj.vx=othervx2
                         
-                        vy2 = othervy1*(2*other_obj.m/(self.m+ other_obj.m))+vy1*(self.m-other_obj.m)/(self.m+other_obj.m)
-                        othervy2 = othervy1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vy1*((2*self.m/(self.m+ other_obj.m)))
-                        # self.vy=vy2*math.sin(theta)
-                        # other_obj.vy=othervy2*math.sin(theta)
-                        self.vy=vy2
-                        other_obj.vy=othervy2
+                        
+                #         vy2 = othervy1*(2*other_obj.m/(self.m+ other_obj.m))+vy1*(self.m-other_obj.m)/(self.m+other_obj.m)
+                #         othervy2 = othervy1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vy1*((2*self.m/(self.m+ other_obj.m)))
+                #         self.vy=vy2*math.sin(theta)
+                #         other_obj.vy=othervy2*math.sin(theta)
+                        
                         
                     #other_obj.vy = othervyorg*((other_obj.m-self.m)/(self.m+other_obj.m))+ vyorg*((2*self.m/(self.m+ other_obj.m)))
             # drag drop physics
