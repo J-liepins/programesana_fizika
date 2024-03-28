@@ -65,15 +65,25 @@ class PhysicsObject:
                         vyorg=self.vy
                         othervxorg=other_obj.vx
                         othervyorg=other_obj.vy
+                        
                         vx1= vxorg*math.cos(theta)+vyorg*math.sin(theta)
                         vy1= vxorg*math.sin(theta)+vyorg*math.cos(theta)
                         othervx1= othervxorg*math.cos(theta)+othervyorg*math.sin(theta)
                         othervy1= othervxorg*math.sin(theta)+othervyorg*math.cos(theta)
+                        
                         vx2 = othervx1*(2*other_obj.m/(self.m+ other_obj.m))+vx1*(self.m-other_obj.m)/(self.m+other_obj.m)
                         othervx2 = othervx1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vx1*((2*self.m/(self.m+ other_obj.m)))
-                        self.vx=vx2*math.cos(theta)
-                        self.vy=vy1*math.sin(theta)
-                        other_obj.vx=othervx2*math.cos(theta)
-                        other_obj.vy=othervy1*math.sin(theta)
+                        # self.vx=vx2*math.cos(theta)
+                        # other_obj.vx=othervx2*math.cos(theta)
+                        self.vx=vx2
+                        other_obj.vx=othervx2
+                        
+                        vy2 = othervy1*(2*other_obj.m/(self.m+ other_obj.m))+vy1*(self.m-other_obj.m)/(self.m+other_obj.m)
+                        othervy2 = othervy1*((other_obj.m-self.m)/(self.m+other_obj.m))+ vy1*((2*self.m/(self.m+ other_obj.m)))
+                        # self.vy=vy2*math.sin(theta)
+                        # other_obj.vy=othervy2*math.sin(theta)
+                        self.vy=vy2
+                        other_obj.vy=othervy2
+                        
                     #other_obj.vy = othervyorg*((other_obj.m-self.m)/(self.m+other_obj.m))+ vyorg*((2*self.m/(self.m+ other_obj.m)))
             # drag drop physics

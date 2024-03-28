@@ -19,8 +19,9 @@ def clickCallback(event):
 def releaseCallback(event):
     global dragObj
     global objs
-    dragObj.physics = True
-    dragObj = None
+    if dragObj is not None:
+        dragObj.physics = True
+        dragObj = None
     
 
 def dragCallback(event):
@@ -43,7 +44,9 @@ def dragCallback(event):
             dragObj.vy = 0.005*((event.y - prev_mouse_pos[1])/ elapsed_time)
         prev_mouse_pos = (event.x, event.y)
         prev_time = current_time
-    
+    g_str = screen.slider_g.get()
+    g_value = float(g_str)
+    PhysicsObject.g = g_value
 
 def rightClickCallback(event):
     global objs
@@ -70,8 +73,9 @@ def rightClickCallback(event):
     vy_value = float(vy_str)
     r_value = float(r_str)
     m_value = float(m_str)
+
+ 
     objs.append(PhysicsObject(sx=event.x, sy=event.y, svx=vx_value, svy=vy_value, sr=r_value, sm=m_value))  # Create object with vx and vy valu
-    
 def resetCallback(event):
     global objs
     objs.clear()
@@ -87,6 +91,7 @@ while True:
     for obj in objs:
         obj.physics_update(objs)
         screen.drawCircle(obj.x, obj.y, obj.r, outline='black', fill=None, width = 3)
+
     g_str = screen.slider_g.get()
     g_value = float(g_str)
     PhysicsObject.g = g_value
@@ -102,6 +107,7 @@ while True:
     gf_str = screen.slider_gf.get()
     gf_value = float(gf_str)
     PhysicsObject.gf = gf_value
+
     # Canvas outline
     screen.drawLine([0, 0, Screen.SCR_WIDTH, 0, Screen.SCR_WIDTH, Screen.SCR_HEIGHT, 0, Screen.SCR_HEIGHT, 0, 0])
     # Draw stuff and delete old lines
