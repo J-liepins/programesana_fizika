@@ -1,21 +1,22 @@
 import tkinter as tk
-from tkinter import Canvas, Entry, messagebox
+from tkinter import Canvas, Entry
 from tkinter import *
 import time
+import pyautogui
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
-    SCR_WIDTH = 1080
-    SCR_HEIGHT = 360
-    
+    x,y = pyautogui.size()
+    SCR_WIDTH = x
+    SCR_HEIGHT = y
     # Seconds between frames for 60fps
     FRAME_TIME = 0.01666
 
     def __init__(self, clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback):
         # Create window
         self.window = tk.Tk()
-        
+        self.window.attributes("-fullscreen", True)
         # Add canvas
-        self.canvas = Canvas(self.window, width=Screen.SCR_WIDTH, height=Screen.SCR_HEIGHT)
+        self.canvas = Canvas(self.window, width = Screen.SCR_WIDTH, height = Screen.SCR_HEIGHT-300)
         self.canvas.grid(row=0, columnspan=15)
 
         # Canvas event callbacks
@@ -45,6 +46,7 @@ class Screen:
         self.entry_y = Entry(self.window)
         self.entry_y.insert(0, "0")
         self.entry_y.grid(row=2, column=1)
+        self.entry_y.place(x = 500, y =500)
 
         self.label3 = tk.Label(self.window, text="r")
         self.label3.grid(row=3, column=0)

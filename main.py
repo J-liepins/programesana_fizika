@@ -93,6 +93,7 @@ while True:
         screen.drawCircle(obj.x, obj.y, obj.r, outline='black', fill=None, width = 3)
 
     g_str = screen.slider_g.get()
+
     g_value = float(g_str)
     PhysicsObject.g = g_value
     ex_str = screen.slider_ex.get()
