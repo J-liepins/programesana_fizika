@@ -16,8 +16,9 @@ class Screen:
         self.window = tk.Tk()
         self.window.attributes("-fullscreen", True)
         # Add canvas
-        self.canvas = Canvas(self.window, width = Screen.SCR_WIDTH, height = Screen.SCR_HEIGHT-300)
-        self.canvas.grid(row=0, columnspan=15)
+        self.canvas = Canvas(self.window, width = Screen.SCR_WIDTH, height = Screen.SCR_HEIGHT)
+        self.canvas.place(x = 0, y = 0)
+        #self.canvas.grid(row=0, columnspan=15)
 
         # Canvas event callbacks
         self.canvas.bind('<Button-1>', clickCallback)
@@ -46,7 +47,6 @@ class Screen:
         self.entry_y = Entry(self.window)
         self.entry_y.insert(0, "0")
         self.entry_y.grid(row=2, column=1)
-        self.entry_y.place(x = 500, y =500)
 
         self.label3 = tk.Label(self.window, text="r")
         self.label3.grid(row=3, column=0)
@@ -96,6 +96,13 @@ class Screen:
         self.slider_gf = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
         self.slider_gf.set(1)
         self.slider_gf.grid(row=4, column=3)
+
+        self.label10 = tk.Label(self.window, text="elasticity b")
+        self.label10.grid(row=5, column=2)
+
+        self.slider_eb = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_eb.set(1)
+        self.slider_eb.grid(row=5, column=3)
 
 
         # Ignore this
