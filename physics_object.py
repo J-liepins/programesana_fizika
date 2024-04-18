@@ -8,7 +8,7 @@ class PhysicsObject:
     gf = 0
     f = 0   
     eb = 0
-    epsilon = 1e-2
+    epsilon = 0.0001
     def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0, sr = 20, sm = 1):
         self.x = sx
         self.y=sy
@@ -73,7 +73,7 @@ class PhysicsObject:
                 dist = math.sqrt(dx**2 + dy**2)+PhysicsObject.epsilon
                 if (dist > (self.r + other_obj.r)): continue
 
-                normal = np.array([dx / dist, dy / dist])
+                normal = np.array([dx / dist, dy / dist]) 
                 tangent = np.array([normal[1] * -1, normal[0]])
 
                 # Calculate overlap
@@ -88,14 +88,6 @@ class PhysicsObject:
                 v1 = np.array([self.vx, self.vy])
                 v2 = np.array([other_obj.vx, other_obj.vy])
 
-                # over= (self.r+other_obj.r)-dist
-                # over_x= self.x-other_obj.x
-                # over_y= self.y-other_obj.y
-                # self.x=self.x+(over_x/2)
-                # self.y=self.y+(over_y/2)
-                # other_obj.x=other_obj.x-(over_x/2)
-                # other_obj.y=other_obj.y-(over_y/2)
-
                 scalar1norm = np.dot(normal, v1)
                 scalar2norm = np.dot(normal, v2)
                 scalar1tan = np.dot(tangent, v1)
@@ -103,7 +95,7 @@ class PhysicsObject:
 
                 scalar1norm_after = (scalar1norm * (self.m - other_obj.m) + 2 * other_obj.m * scalar2norm) / (self.m + other_obj.m)
                 scalar2norm_after = (scalar2norm * (other_obj.m - self.m) + 2 * self.m * scalar1norm) / (self.m + other_obj.m)
-                
+                    
                 vector1norm_after = normal * scalar1norm_after
                 vector2norm_after = normal * scalar2norm_after
                 vector1norm = tangent * scalar1tan
