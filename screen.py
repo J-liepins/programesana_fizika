@@ -15,8 +15,9 @@ class Screen:
         self.window = tk.Tk()
         
         # Add canvas
-        self.canvas = Canvas(self.window, width=Screen.SCR_WIDTH, height=Screen.SCR_HEIGHT)
+        self.canvas = Canvas(self.window, width=Screen.SCR_WIDTH, height=Screen.SCR_HEIGHT, bg='light blue')
         self.canvas.grid(row=0, columnspan=15)
+       
 
         # Canvas event callbacks
         self.canvas.bind('<Button-1>', clickCallback)
@@ -129,9 +130,9 @@ class Screen:
         canvas_line_id = self.canvas.create_line(points, fill=color, width=width)
         self.canvas_elements.append(canvas_line_id)
 
-    def drawCircle(self, x, y, radius = 10, fill = None, outline = 'black', width = 10):
+    def drawCircle(self, x, y, radius = 10, fill = 'white', outline = 'white', width = 10,):
         # Draw circle and add id to be deleted next frame
-        canvas_circle_id = self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=fill, outline=outline, width=width)
+        canvas_circle_id = self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill='white', outline='white', width=width)
         self.canvas_elements.append(canvas_circle_id)
 
         
