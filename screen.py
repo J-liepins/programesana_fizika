@@ -1,19 +1,20 @@
 import tkinter as tk
-from tkinter import Canvas, Entry, messagebox
+from tkinter import Canvas, Entry
 from tkinter import *
 import time
+import pyautogui
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
-    SCR_WIDTH = 1080
-    SCR_HEIGHT = 360
-    
+    x,y = pyautogui.size()
+    SCR_WIDTH = x
+    SCR_HEIGHT = y
     # Seconds between frames for 60fps
     FRAME_TIME = 0.01666
 
     def __init__(self, clickCallback, releaseCallback, dragCallback, rightClickCallback, resetCallback):
         # Create window
         self.window = tk.Tk()
-        
+        self.window.attributes("-fullscreen", True)
         # Add canvas
         self.canvas = Canvas(self.window, width=Screen.SCR_WIDTH, height=Screen.SCR_HEIGHT, bg='light blue')
         self.canvas.grid(row=0, columnspan=15)
@@ -95,6 +96,13 @@ class Screen:
         self.slider_gf = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
         self.slider_gf.set(1)
         self.slider_gf.grid(row=4, column=3)
+
+        self.label10 = tk.Label(self.window, text="elasticity b")
+        self.label10.grid(row=5, column=2)
+
+        self.slider_eb = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
+        self.slider_eb.set(1)
+        self.slider_eb.grid(row=5, column=3)
 
 
         # Ignore this
