@@ -31,6 +31,19 @@ class PhysicsObject:
                 self.vy *= PhysicsObject.ey
             if (self.x + self.r >= Screen.SCR_WIDTH and self.vx>0) or (self.x - self.r <= 0 and self.vx<0):
                 self.vx *= PhysicsObject.ex
+            if self.y+self.r>=Screen.SCR_HEIGHT:
+                wallc=Screen.SCR_HEIGHT-(self.y+self.r)
+                self.y=wallc+self.y
+            if self.x+self.r>=Screen.SCR_WIDTH:
+                wallc=Screen.SCR_WIDTH-(self.x+self.r)
+                self.x=wallc+self.x
+            if self.x-self.r<=0:
+                wallc=0-(self.x-self.r)
+                self.x=wallc+self.x
+            if self.y-self.r<=0:
+                wallc=0-(self.y-self.r)
+                self.y=wallc+self.y
+                
             
             # Drag un friction
             if (abs(self.vx) >= 0.01):
@@ -64,14 +77,23 @@ class PhysicsObject:
                 tangent = np.array([normal[1] * -1, normal[0]])
                 v1 = np.array([self.vx, self.vy])
                 v2 = np.array([other_obj.vx, other_obj.vy])
+              
 
                 over= (self.r+other_obj.r)-dist
                 over_x= self.x-other_obj.x
                 over_y= self.y-other_obj.y
+                if self.y+1<self.r:
+                    self.x=self.x+(over_x/2)
+                    self.y=self.y+over_y
+                if other_obj.y+1<other_obj.r:
+                    other_obj.x=other_obj.x-(over_x/2)
+                    other_obj.y=other_obj.y-(over_y/2)
                 self.x=self.x+(over_x/2)
                 self.y=self.y+(over_y/2)
                 other_obj.x=other_obj.x-(over_x/2)
                 other_obj.y=other_obj.y-(over_y/2)
+                
+                    
 
                 scalar1norm = np.dot(normal, v1)
                 scalar2norm = np.dot(normal, v2)
@@ -92,7 +114,8 @@ class PhysicsObject:
                 self.vy = v1_after[1]
                 other_obj.vx = v2_after[0]
                 other_obj.vy = v2_after[1]
-
+                # wall cliping
+        
                
 
 # import math
