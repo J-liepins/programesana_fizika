@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import Canvas, Entry
 from tkinter import *
 import time
-import pyautogui
+import pyautogui 
 class Screen:
     # Get with Screen.SCR_WIDTH or Screen.SCR_HEIGHT
     x,y = pyautogui.size()
@@ -143,4 +143,3 @@ class Screen:
         canvas_circle_id = self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=fill, outline=outline, width=width)
         self.canvas_elements.append(canvas_circle_id)
 
-        

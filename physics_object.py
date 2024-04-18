@@ -17,7 +17,6 @@ class PhysicsObject:
         self.r = sr
         self.physics = True
         self.m = sm 
-    
     def physics_update(self, objs):
         if self.physics:
             # Apply vx and vy
@@ -42,7 +41,10 @@ class PhysicsObject:
             else:
                 if(self.x - self.r <= 0):
                     self.x = self.r
-                    self.vx *= PhysicsObject.ex        
+                    self.vx *= PhysicsObject.ex 
+            if (self.y> Screen.SCR_HEIGHT-self.r-1 and self.vy<0.2*PhysicsObject.g and self.vy>-0.2*PhysicsObject.g and PhysicsObject.g !=0 ):
+               self.vy=0
+
             
             
             # Drag un friction
@@ -87,6 +89,7 @@ class PhysicsObject:
 
                 v1 = np.array([self.vx, self.vy])
                 v2 = np.array([other_obj.vx, other_obj.vy])
+              
 
                 scalar1norm = np.dot(normal, v1)
                 scalar2norm = np.dot(normal, v2)
