@@ -9,7 +9,7 @@ class PhysicsObject:
     f = 0   
     eb = 0
     epsilon = 1e-2
-    def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0, sr = 20, sm = 1):
+    def __init__(self, sx=Screen.SCR_WIDTH/2, sy=Screen.SCR_HEIGHT/2, svx=100, svy=0, sr = 20, sm = 1, ey=0):
         self.x = sx
         self.y=sy
         self.vx= svx
@@ -17,7 +17,7 @@ class PhysicsObject:
         self.r = sr
         self.physics = True
         self.m = sm 
-    
+        self.ey=ey
     def physics_update(self, objs):
         if self.physics:
             # Apply vx and vy
@@ -42,7 +42,10 @@ class PhysicsObject:
             else:
                 if(self.x - self.r <= 0):
                     self.x = self.r
-                    self.vx *= PhysicsObject.ex        
+                    self.vx *= PhysicsObject.ex 
+            if (self.y> Screen.SCR_HEIGHT-self.r-1 and self.vy<0.2*PhysicsObject.g and self.vy>-0.2*PhysicsObject.g and PhysicsObject.g !=0 ):
+               self.vy=0
+
             
             
             # Drag un friction
