@@ -72,20 +72,21 @@ class PhysicsObject:
                 # If not colliding, continue
                 dx = other_obj.x - self.x
                 dy = other_obj.y - self.y
-                dist = math.sqrt(dx**2 + dy**2)+PhysicsObject.epsilon
+                dist = math.sqrt(dx**2 + dy**2)#+PhysicsObject.epsilon
                 if (dist > (self.r + other_obj.r)): continue
 
                 normal = np.array([dx / dist, dy / dist]) 
                 tangent = np.array([normal[1] * -1, normal[0]])
 
                 # Calculate overlap
-                overlap = (self.r + other_obj.r) - dist
+                #overlap = (self.r + other_obj.r) - dist
+                repulsion = np.multiply(normal, self.r + other_obj.r - dist)
 
                 # Adjust positions to separate objects
-                self.x -= normal[0] * overlap / 2
-                self.y -= normal[1] * overlap / 2
-                other_obj.x += normal[0] * overlap / 2
-                other_obj.y += normal[1] * overlap / 2
+                self.x -= normal[0] + repulsion[0]/1 #* overlap / 2
+                self.y -= normal[1] + repulsion[1]/1 #* overlap / 2
+                other_obj.x += normal[0] + repulsion[0]/1 #* overlap / 2
+                other_obj.y += normal[1] + repulsion[1]/1 # * overlap / 2
 
                 v1 = np.array([self.vx, self.vy])
                 v2 = np.array([other_obj.vx, other_obj.vy])
@@ -106,7 +107,12 @@ class PhysicsObject:
 
                 v1_after = vector1norm + vector1norm_after
                 v2_after = vector2norm + vector2norm_after
+
                 self.vx = PhysicsObject.eb * v1_after[0]
                 self.vy = PhysicsObject.eb * v1_after[1]
                 other_obj.vx = PhysicsObject.eb * v2_after[0]
                 other_obj.vy = PhysicsObject.eb * v2_after[1]
+
+                
+
+
