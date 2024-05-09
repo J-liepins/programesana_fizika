@@ -58,7 +58,7 @@ def generate_new_ball(existing_balls, click_x, click_y, min_distance=50):
     # Generate coordinates for the new ball next to the closest ball
     new_x = closest_ball.x + random.randint(-min_distance, min_distance)
     new_y = closest_ball.y + random.randint(-min_distance, min_distance)
-    
+
     # Ensure the new coordinates are within the screen bounds
     new_x = max(min(new_x, Screen.SCR_WIDTH - 2*min_distance), 2*min_distance)
     new_y = max(min(new_y, Screen.SCR_HEIGHT - 2*min_distance), 2*min_distance)

@@ -69,14 +69,14 @@ class Screen:
         self.slider_g.set(1)
         self.slider_g.grid(row=5, column=1)
 
-        self.label6 = tk.Label(self.window, text="elasticity x")
+        self.label6 = tk.Label(self.window, text="elasticitāte x")
         self.label6.grid(row=1, column=2)
 
         self.slider_ex = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
         self.slider_ex.set(1)
         self.slider_ex.grid(row=1, column=3)
 
-        self.label7 = tk.Label(self.window, text="elasticity y")
+        self.label7 = tk.Label(self.window, text="elasticitāte y")
         self.label7.grid(row=2, column=2)
 
         self.slider_ey = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
@@ -97,7 +97,7 @@ class Screen:
         self.slider_gf.set(1)
         self.slider_gf.grid(row=4, column=3)
 
-        self.label10 = tk.Label(self.window, text="elasticity b")
+        self.label10 = tk.Label(self.window, text="elasticitāte b")
         self.label10.grid(row=5, column=2)
 
         self.slider_eb = tk.Scale(self.window, from_=0, to=1, orient=HORIZONTAL, resolution = 0.01)
